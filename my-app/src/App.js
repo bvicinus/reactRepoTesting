@@ -1,11 +1,25 @@
 import React from 'react';
 
 class App extends React.Component {
+    constructor(){
+        super(); //this will give 'this' the context of this component rather than its parent
+        this.state = {
+            txt: 'this is the state txt',
+            cat: 0
+        }
+    }
+
+    update( e ) {
+        this.setState({txt: e.target.value})
+    }
+
     render(){
         return (
          <div>
-            <h1>{this.props.txt}</h1>
-             <b>Bold Text</b>
+             <input type="text"
+                    onChange={this.update.bind(this)}/>
+            <h1>{this.state.txt}</h1>
+             <b>{this.state.cat}</b>
          </div>
         )
     }
