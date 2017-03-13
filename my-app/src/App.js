@@ -3,37 +3,43 @@ import React from 'react';
 class App extends React.Component {
     constructor(){
         super();
-        this.state = {currentEvent: '---'}
-        this.update = this.update.bind(this)
+        this.state = {a:''}
     }
-    update(e){
-        this.setState({currentEvent: e.type})
+    update(){
+        this.setState({
+            a: this.a.value,   //example using a callback node
+            b: this.refs.b.value  //regular ref
+        })
     }
 
     render(){
         return (
             <div>
-                <textarea
-                    onKeyPress={this.update}
-                    onCopy={this.update}
-                    onCut={this.update}
-                    onPaste={this.update}
-                    onFocus={this.update}
-                    onBlur={this.update}
-                    onDoubleClick={this.update}
-                    //ipod movement events
-                    onTouchStart={this.update}
-                    onTouchMove={this.update}
-                    onTouchEnd={this.update}
-                    cols="30"
-                    rows="10" />
-                <h1>{this.state.currentEvent}</h1>
+                <input
+                    ref={node => this.a = node} //the ref can take a callback, where we return a node
+                    type="text"
+                    onChange={this.update.bind(this)}
+                    />
+
+                <br/>
+                <br/>
+                {this.state.a}
+
+                <hr />
+
+                <input
+                    ref="b"  //ref actually returns a node, that's why this works the same as node a above
+                    type="text"
+                    onChange={this.update.bind(this)}
+                />
+
+                <br/>
+                <br/>
+                {this.state.b}
+
             </div>
         )
     }
 }
-
-
-
 
 export default App
