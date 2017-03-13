@@ -4,6 +4,6 @@ import App from './App';
 
 
 ReactDOM.render(
-  <App />,
+  <App  cat={1234} />,
   document.getElementById('root')
 );
